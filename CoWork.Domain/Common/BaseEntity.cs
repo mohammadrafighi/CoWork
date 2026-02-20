@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoWork.Domain.Abstraction
+namespace CoWork.Domain.Common
 {
     public abstract class BaseEntity<Tkey>
-        where Tkey : struct
     {
-        public Tkey Id { get;protected set; }
+        public Tkey Id { get; protected set; }
     }
 }

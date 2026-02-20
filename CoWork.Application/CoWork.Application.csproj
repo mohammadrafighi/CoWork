@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CoWork.Domain\CoWork.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
