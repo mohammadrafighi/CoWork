@@ -7,7 +7,7 @@ namespace CoWork.Application.Interfaces
 {
     public interface IAuthService
     {
-        Task RegisterAsync(RegisterDto registerDto);
+        Task<Guid> RegisterAsync(RegisterDto registerDto);
         Task<string> LoginAsync(LoginDto loginDto);
         Task LogoutAsync();
         Task<IEnumerable<UserDto>> GetAllAsync();
