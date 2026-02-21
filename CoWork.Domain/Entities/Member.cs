@@ -13,11 +13,14 @@ namespace CoWork.Domain.Entities
             FirstName = firstName;
             LastName = lastName;
             UserId = userId;
+            Email = "Amir@gmail.com";
+            PhoneNumber = "09876541234";
+            NationalCode = "oishefhseod";
         } 
            
         public string FirstName {  get; private set; }
         public string LastName { get; private set; }
-        public string Email { get; private set; }
+        public string Email { get; private set; }    
         public string PhoneNumber { get; private set; }
         public string NationalCode {  get; private set; }
         public Guid UserId { get; private set; }
@@ -29,10 +32,10 @@ namespace CoWork.Domain.Entities
         public void ChangePhoneNumber(string phoneNumber) => PhoneNumber = phoneNumber; 
         public void ChangeNationalCode(string nationalCode) => NationalCode = nationalCode;
         public void Activate() => IsActive = true;
-        public void Deactivate() => IsActive = false;   
+        public void Deactivate() => IsActive = false;
         public static Member CreateMember(string firstName, string lastName, Guid userId)
         {
-           return new Member(firstName, lastName, userId);
+            return new Member(firstName, lastName, userId);
         }
 
     }

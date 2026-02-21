@@ -11,12 +11,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Member\" />
-    <Folder Include="Features\Auth\" />
+    <Folder Include="Features\Members\Query\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="14.0.0" />
+    <PackageReference Include="AutoMapper" Version="16.0.0" />
+    <PackageReference Include="MediatR" Version="11.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
   </ItemGroup>
 
 </Project>
