@@ -15,7 +15,6 @@ rsa.ImportRSAPrivateKey(privateKeyBytes, out _);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-
 builder.Services.AddSingleton<RSA>(rsa);
 builder.Services.AddScoped(typeof(IGenericRepository<,>),typeof(GenericRepository<,>));
 
