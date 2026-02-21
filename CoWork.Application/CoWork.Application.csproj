@@ -10,4 +10,13 @@
     <ProjectReference Include="..\CoWork.Domain\CoWork.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Member\" />
+    <Folder Include="Features\Auth\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.0.0" />
+  </ItemGroup>
+
 </Project>
