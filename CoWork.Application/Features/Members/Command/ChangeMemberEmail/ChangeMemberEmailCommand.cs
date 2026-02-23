@@ -1,0 +1,11 @@
+﻿using CoWork.Application.Abstraction.CQRS;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace CoWork.Application.Features.Members.Command.ChangeMemberEmail
+{
+    public record ChangeMemberEmailCommand(Guid memberId, string Email) : ICommand<bool>
+    {
+    }
+}

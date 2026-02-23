@@ -1,6 +1,8 @@
-﻿using CoWork.Application.Features.Auth.Command.CahngePassword;
+﻿using AutoMapper;
+using CoWork.Application.Features.Auth.Command.CahngePassword;
 using CoWork.Application.Features.Members.Command.CreateMember;
 using CoWork.Application.Interfaces;
+using CoWork.Application.Mapping;
 using CoWork.Infrastructure.Identity;
 using CoWork.Infrastructure.Persistence;
 using CoWork.Infrastructure.Repositories;
@@ -49,6 +51,7 @@ builder.Services.AddSingleton<RSA>(rsa);
 builder.Services.AddScoped(typeof(IGenericRepository<,>),typeof(GenericRepository<,>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>

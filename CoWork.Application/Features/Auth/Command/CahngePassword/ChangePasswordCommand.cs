@@ -7,7 +7,7 @@ using System.Text;
 
 namespace CoWork.Application.Features.Auth.Command.CahngePassword
 {
-    public record ChangePasswordCommand(ChangePasswordDto changePassword) : ICommand
+    public record ChangePasswordCommand(string Username , string CurrentPassword , string NewPassword) : ICommand<Guid>
     {
     }
 }
