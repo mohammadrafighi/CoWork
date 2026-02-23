@@ -41,7 +41,7 @@ namespace CoWork.Domain.Spaces
 
         public void ChangePrice(decimal price)
         {
-            if (price <= 0)throw new InvalidOperationException("Price must be greater than zero.");
+            if (price < 0)throw new InvalidOperationException("Price must be positive.");
 
             PriceOverride = price;
         }

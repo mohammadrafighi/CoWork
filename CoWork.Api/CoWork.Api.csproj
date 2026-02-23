@@ -7,11 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CoWork.Application\CoWork.Application.csproj" />
+    <ProjectReference Include="..\CoWork.Domain\CoWork.Domain.csproj" />
+    <ProjectReference Include="..\CoWork.Infrastructure\CoWork.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

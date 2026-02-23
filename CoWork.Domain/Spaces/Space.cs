@@ -11,6 +11,9 @@ namespace CoWork.Domain.Spaces
         public int BaseCapacity { get; private set;  }
         public decimal BaseDailyPrice {  get; private set; }
         public WorkHours WorkHours { get; private set; }
+      /// <summary>
+      /// we save only days with changes
+      /// </summary>
         private readonly List<DailySpaceSetting> _dailySettings= new List<DailySpaceSetting>();
         public IReadOnlyCollection<DailySpaceSetting> DailySettings => _dailySettings.AsReadOnly();
         private Space() { }
@@ -56,10 +59,20 @@ namespace CoWork.Domain.Spaces
             var setting = GetOrCreateDailySetting(date);
             setting.Close();
         }
-        public decimal GetPriceFor(DateOnly date)
+        public decimal GetPriceForADay(DateOnly date)
         {
             var setting=_dailySettings.FirstOrDefault(x=>x.Date == date);
             return setting?.GetEffectivePrice(BaseDailyPrice)??BaseDailyPrice;
+        }
+        public void ChangeBaseCapacity(int newBaseCapacity) 
+        {
+            if (newBaseCapacity <= 0) throw new ArgumentOutOfRangeException("base capacity must be upper than zero");
+            BaseCapacity= newBaseCapacity;
+        }
+        public void ChangeBaseDailyPrice(decimal newBasePrice) 
+        {
+            if (newBasePrice <= 0) throw new ArgumentOutOfRangeException("base daily price must be upper than zero");
+            BaseDailyPrice= newBasePrice;
         }
 
     }
