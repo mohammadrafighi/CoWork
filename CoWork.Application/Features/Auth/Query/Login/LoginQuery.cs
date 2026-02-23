@@ -1,5 +1,4 @@
 ﻿using CoWork.Application.Abstraction.CQRS;
-using Microsoft.IdentityModel.JsonWebTokens;
 using System;
 using System.Collections.Generic;
 using System.Text;

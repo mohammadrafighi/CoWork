@@ -86,7 +86,7 @@ namespace CoWork.Infrastructure.Identity
 
         }
 
-        public async Task ChangePassword(ChangePasswordDto changePasswordDto)
+        public async Task<Guid> ChangePassword(ChangePasswordDto changePasswordDto)
         {
             var user = await _userManager.FindByNameAsync(changePasswordDto.Username);
             var cheak = await _userManager.CheckPasswordAsync(user, changePasswordDto.CurrentPassword);
@@ -94,12 +94,26 @@ namespace CoWork.Infrastructure.Identity
             {
                 throw new Exception();
             }
-            await _userManager.ChangePasswordAsync
+            var result = await _userManager.ChangePasswordAsync
                 (user,
                 changePasswordDto.CurrentPassword,
                 changePasswordDto.NewPassword);
+            if (result.Succeeded)
+            { return user.Id; }
+            else
+            {
+                throw new Exception("We cant Change Pass");
+            }
         }
-        //todo:
+        public async Task<Guid> ChangeUserName(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            user.UserName = username;
+            await _userManager.UpdateAsync(user);
+            return user.Id; 
+
+        }
+            //todo:
         public Task LogoutAsync()
         {
             throw new NotImplementedException();
