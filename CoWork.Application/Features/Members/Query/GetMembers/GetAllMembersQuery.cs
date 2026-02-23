@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoWork.Application.Features.Auth.Query.GetAll
+namespace CoWork.Application.Features.Members.Query.GetMembers
 {
-    public class GetAllQuery : IQuery<IEnumerable<UserDto>>
+    public record GetAllMembersQuery():IQuery<IEnumerable<MemberDto>>
     {
     }
 }

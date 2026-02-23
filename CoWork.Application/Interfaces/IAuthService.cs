@@ -8,11 +8,12 @@ namespace CoWork.Application.Interfaces
     public interface IAuthService
     {
         Task<Guid> RegisterAsync(RegisterDto registerDto);
+        Task<Guid> ChangeUserName(string UserName);
         Task<string> LoginAsync(LoginDto loginDto);
         Task LogoutAsync();
         Task<IEnumerable<UserDto>> GetAllAsync();
         Task<string> RefreshToken();
-        Task ChangePassword(ChangePasswordDto changePasswordDto);
+        Task<Guid> ChangePassword(ChangePasswordDto changePasswordDto);
         
 
     }

@@ -1,4 +1,9 @@
-﻿using CoWork.Application.Features.Members.Command.CreateMember;
+﻿using CoWork.Application.DTOs.Member;
+using CoWork.Application.Features.Members.Command.ChangeMemberEmail;
+using CoWork.Application.Features.Members.Command.ChangeMemberStatus;
+using CoWork.Application.Features.Members.Command.CreateMember;
+using CoWork.Application.Features.Members.Command.UpdateMemberProfile;
+using CoWork.Application.Features.Members.Query.GetMembers;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,5 +26,31 @@ namespace CoWork.Api.Controllers
             return Ok(id);
          
         }
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetAll(CancellationToken cancellationToken)
+        {
+            var Query = new GetAllMembersQuery();
+            var members = await _mediator.Send(Query, cancellationToken);
+              return Ok( members);  
+        }  
+        [HttpPut("UpdateProfile")]
+        public async Task<ActionResult<Guid>> UpdateProfile([FromQuery]UpdateMemberProfileCommand request)
+        {
+            var memberId = _mediator.Send(request);
+            return Ok(memberId);
+        }
+        [HttpPut("ChangeMemberStatus")]
+        public async Task<ActionResult<bool>> ChangeMemberStatus(ChangeMemberStatusCommand request)
+        {
+            var memberStatus = _mediator.Send(request);
+            return Ok(memberStatus);
+        }
+        [HttpPut("ChangeMemberEmail")]
+        public async Task<ActionResult<bool>> ChangeMemberEmail(ChangeMemberEmailCommand request)
+        {
+            var ChangeStatus = _mediator.Send(request);
+            return Ok(ChangeStatus);
+        }
+
     }
 }
