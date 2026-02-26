@@ -82,13 +82,25 @@ namespace CoWork.Infrastructure.Repositories
             return await query.Select(selector).ToListAsync();
         }
 
-        public Task<TResult?> QuerySingleAsync<TResult>(
+        public async Task<TResult?> QuerySingleAsync<TResult>(
             Expression<Func<TEntity, bool>> predicate,
             Expression<Func<TEntity, TResult>> selector,
             Func<IQueryable<TEntity>, IQueryable<TEntity>>? include = null,
-            bool asNoTracking = true)
+            bool asNoTracking = true,
+            CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            IQueryable<TEntity> query = _context.Set<TEntity>();
+
+            if (asNoTracking)
+                query = query.AsNoTracking();
+
+            if (include != null)
+                query = include(query);
+
+            return await query
+                .Where(predicate)
+                .Select(selector)
+                .SingleOrDefaultAsync(cancellationToken);
         }
     }
 }

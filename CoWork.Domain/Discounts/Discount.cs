@@ -9,8 +9,6 @@ namespace CoWork.Domain.Discounts
     public class Discount : AggregateRoot<Guid>
     {
         public string Code { get; private set; }
-        //Todo No need type....tierd go to reserve
-        public DiscountType Type { get; private set; }
         public DiscountVisibility Visibility { get; private set; }
         public DateTime ExpireAt { get; private set; }
         /// <summary>
@@ -21,7 +19,7 @@ namespace CoWork.Domain.Discounts
         private readonly IDiscountRule _rule;
         private Discount() { }
         public Discount(string code,
-            DiscountType type,
+            
             DiscountVisibility visibility,
             DateTime expireAt,
             IDiscountRule rule)
@@ -30,7 +28,7 @@ namespace CoWork.Domain.Discounts
             if (expireAt < DateTime.UtcNow) throw new ArgumentException("expire date must be in future");
             Id = Guid.NewGuid();
             Code = code;
-            Type = type;
+            
             Visibility = visibility;
             _rule = rule;
             ExpireAt = expireAt;
@@ -45,10 +43,10 @@ namespace CoWork.Domain.Discounts
         /// <summary>
         /// Calculate discount result before payment
         /// </summary>
-        public DiscountResult Apply(Guid userId, int totalDays, decimal dailyPrice)
+        public DiscountResult Apply(Guid userId,decimal totalPrice)
         {
             if (!CanBeUsedBy(userId)) throw new InvalidOperationException("discount can not be used");
-            return _rule.Calculate(totalDays, dailyPrice);
+            return _rule.Calculate(totalPrice);
         }
         /// <summary>
         /// End of discount After successfull payment

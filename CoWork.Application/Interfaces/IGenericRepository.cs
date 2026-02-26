@@ -25,6 +25,7 @@ namespace CoWork.Application.Interfaces
         Expression<Func<TEntity, bool>> predicate,
         Expression<Func<TEntity, TResult>> selector,
         Func<IQueryable<TEntity>, IQueryable<TEntity>>? include = null,
-        bool asNoTracking = true);
+        bool asNoTracking = true,
+            CancellationToken cancellationToken = default);
     }
 }

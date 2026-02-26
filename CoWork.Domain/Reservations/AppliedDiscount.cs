@@ -6,14 +6,16 @@ namespace CoWork.Domain.Reservations
 {
     public class AppliedDiscount
     {
+      
         public string Code { get; }
-        public decimal Percentage { get; }
-        public decimal Amount {  get; }
-        public AppliedDiscount(string code,decimal percentage,decimal amount)
+        public decimal DiscountAmount { get; }
+        public int FreeDays { get; }
+
+        public AppliedDiscount(string code, decimal discountAmount, int freeDays)
         {
             Code = code;
-            Percentage = percentage;
-            Amount = amount;
+            DiscountAmount = discountAmount;
+            FreeDays = freeDays;
         }
     }
 }

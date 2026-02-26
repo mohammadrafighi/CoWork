@@ -6,14 +6,21 @@ namespace CoWork.Domain.Discounts
 {
     public class DiscountResult
     {
-        public int FreeDays { get; }
-        public decimal Percentage { get; }
-        private DiscountResult(int freeDays,decimal persentage) 
-        { FreeDays = freeDays;
-            Percentage = persentage;
-        }
-        public static DiscountResult WithPercentage(decimal persentage) => new DiscountResult(0, persentage);
         
-       
+        public decimal DiscountAmount { get; }
+        public int FreeDays { get; }
+
+        public bool HasDiscount =>
+            DiscountAmount > 0 || FreeDays > 0;
+
+        public DiscountResult(decimal discountAmount, int freeDays = 0)
+        {
+            DiscountAmount = discountAmount;
+            FreeDays = freeDays;
+        }
+
+        public static DiscountResult Empty => new(0, 0);
+
+
     }
 }
