@@ -12,9 +12,10 @@ namespace CoWork.Domain.Discounts.Rules
             if(percentage < 0||percentage > 100)throw new ArgumentOutOfRangeException(nameof(percentage));
             Percentage = percentage;
         }
-        public DiscountResult Calculate(int totalDays,decimal dailyPrice)
+        public DiscountResult Calculate(decimal totalPrice)
         {
-            return DiscountResult.WithPercentage(Percentage);
+            var amount = totalPrice * (Percentage / 100);
+            return new DiscountResult(amount);
         }
     }
 }

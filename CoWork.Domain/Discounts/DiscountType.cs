@@ -7,6 +7,6 @@ namespace CoWork.Domain.Discounts
     public enum DiscountType
     {
         Percentage=1,
-        Tiered=2
+        
     }
 }

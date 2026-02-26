@@ -6,6 +6,6 @@ namespace CoWork.Domain.Discounts.Rules
 {
     public interface IDiscountRule
     {
-        DiscountResult Calculate(int totalDays, decimal dailyPrice);
+        DiscountResult Calculate(decimal totalPrice);
     }
 }

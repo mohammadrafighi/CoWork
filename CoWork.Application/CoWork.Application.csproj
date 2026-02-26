@@ -16,4 +16,10 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Reservations\Command\CancelReservation\" />
+    <Folder Include="Features\Reservations\Command\PayReservation\" />
+    <Folder Include="Features\Reservations\Query\" />
+  </ItemGroup>
+
 </Project>
