@@ -3,6 +3,8 @@ using CoWork.Domain.Discounts;
 using CoWork.Domain.Entities;
 using CoWork.Domain.Reservations;
 using CoWork.Domain.Spaces;
+using CoWork.Domain.Transactions;
+using CoWork.Domain.Wallets;
 using CoWork.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,7 @@ namespace CoWork.Infrastructure.Persistence
         public IGenericRepository<Member, Guid> Members { get; }
         public IGenericRepository<Space, Guid> Spaces { get; }
         public IGenericRepository<WalletAccount, Guid> WalletAccounts { get; }
+        public IGenericRepository<Transaction, Guid> Transactions{ get; }
         public IGenericRepository<Discount, Guid> Discounts { get; }
         public IGenericRepository<Message, Guid> Messages { get; }
         public IGenericRepository<Reservation, Guid> Reservations { get; }
@@ -27,6 +30,7 @@ namespace CoWork.Infrastructure.Persistence
             _context = context;
             Members = new GenericRepository<Member, Guid>(_context);
             Spaces = new GenericRepository<Space, Guid>(_context);
+            Transactions = new GenericRepository<Transaction, Guid>(_context);   
             WalletAccounts = new GenericRepository<WalletAccount, Guid>(_context);
             Discounts = new GenericRepository<Discount, Guid>(_context);
             Messages = new GenericRepository<Message, Guid>(_context);  

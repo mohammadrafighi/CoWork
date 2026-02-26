@@ -6,6 +6,7 @@ namespace CoWork.Application.DTOs.Member
 {
     public class MemberDto
     {
+        public Guid Id { get; set; }    
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }

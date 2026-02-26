@@ -22,4 +22,9 @@
     <Folder Include="Features\Reservations\Query\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Transactions\Command\" />
+    <Folder Include="Features\Transactions\Query\" />
+  </ItemGroup>
+
 </Project>
