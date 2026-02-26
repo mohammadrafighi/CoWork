@@ -8,6 +8,7 @@ namespace CoWork.Domain.Reservations
     {
         Draft=1,
         Paid=2,
-        Cancelled=3
+        Cancelled=3,
+        PendingToPay=4
     }
 }

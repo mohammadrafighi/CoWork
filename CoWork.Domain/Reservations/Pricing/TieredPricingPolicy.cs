@@ -4,21 +4,29 @@ using System.Text;
 
 namespace CoWork.Domain.Reservations.Pricing
 {
-    public class TieredPricingPolicy:IPricingPolicy
+    public class TieredPricingPolicy
     {
-        private readonly int _requiredDays;
-        private readonly int _freeDays;
-        public TieredPricingPolicy(int requiredDays,int freeDays)
+        private readonly List<TieredPricingRule> _rules;
+
+        public TieredPricingPolicy(IEnumerable<TieredPricingRule> rules)
         {
-            _requiredDays = requiredDays;
-            _freeDays = freeDays;
+            _rules = rules.ToList();
         }
+
         public PricingResult ApplyPrice(IReadOnlyCollection<ReservationDay> days)
         {
-            if (days.Count < _requiredDays) return new PricingResult(0, 0);
-            var cheapestDaysAmount = days.OrderBy(d => d.DailyPrice).Take(_freeDays).Sum(d => d.DailyPrice);
-            return new PricingResult(_freeDays, cheapestDaysAmount);
+            PricingResult bestResult = PricingResult.Empty;
 
+            foreach (var rule in _rules)
+            {
+                var result = rule.Apply(days);
+                if (result.DiscountAmount > bestResult.DiscountAmount)
+                    bestResult = result;
+            }
+
+            return bestResult;
+
+           
         }
     }
 }
