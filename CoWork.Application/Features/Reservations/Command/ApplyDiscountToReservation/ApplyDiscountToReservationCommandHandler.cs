@@ -15,13 +15,13 @@ namespace CoWork.Application.Features.Reservations.Command.ApplyDiscountToReserv
         }
         public async Task<Guid> Handle(ApplyDiscountToReservationCommand command,CancellationToken cancellationToken)
         {
-            var reservation = await _unitOfWork.Reservations.GetByIdAsync(command.ReservationId, cancellationToken)
+            var reservation = await _unitOfWork.Reservations.GetByIdAsync(command.reservationId, cancellationToken)
                 ?? throw new InvalidOperationException("reservation not found");
 
             if (reservation.IsPaid) throw new InvalidOperationException("reservation ended");
 
             var discount = await _unitOfWork.Discounts
-                   .QuerySingleAsync(d => d.Code == command.DiscountCode, d => d,
+                   .QuerySingleAsync(d => d.Code == command.discountCode, d => d,
                        cancellationToken: cancellationToken
                    )
                    ?? throw new InvalidOperationException("Discount not found");

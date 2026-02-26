@@ -87,6 +87,21 @@ namespace CoWork.Domain.Reservations
             if (FinalPrice < 0)
                 FinalPrice = 0;
         }
+        public void RemoveDiscount(string code)
+        {
+            if (IsPaid)
+                throw new InvalidOperationException("Cannot remove discount from paid reservation");
+
+            if (AppliedDiscount == null)
+                throw new InvalidOperationException("No discount applied to reservation");
+
+            if (AppliedDiscount.Code != code)
+                throw new InvalidOperationException("Discount code does not match applied discount");
+
+            FinalPrice += AppliedDiscount.DiscountAmount;
+            AppliedDiscount = null;
+
+        }
         public bool IsPaid { get; private set; }
         public void MarkAsPaid()
         {
