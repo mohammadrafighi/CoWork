@@ -3,13 +3,16 @@ using CoWork.Application.Interfaces;
 using CoWork.Application.Interfaces.MinIO;
 using CoWork.Application.Mapping;
 using CoWork.Infrastructure.Identity;
+using CoWork.Infrastructure.MinIO;
 using CoWork.Infrastructure.Persistence;
 using CoWork.Infrastructure.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi;
+using Minio;
 using System.Reflection;
 using System.Security.Cryptography;
 
@@ -51,6 +54,20 @@ builder.Services.AddScoped(typeof(IGenericRepository<,>),typeof(GenericRepositor
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IBucketNameResolver, BucketNameResolver>();
+builder.Services.AddScoped<IFileStorageService, MinIORepository>();
+var minioSettings = builder.Configuration.GetSection("MinioSettings");
+builder.Services.AddSingleton<IMinioClient>(sp =>
+{
+    return new MinioClient()
+        .WithEndpoint(minioSettings["Endpoint"])
+        .WithCredentials(
+            minioSettings["AccessKey"],
+            minioSettings["SecretKey"])
+        .WithSSL(bool.Parse(minioSettings["UseSSL"]))
+        .Build();
+});
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
