@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using CoWork.Domain.Entities;
+using CoWork.Domain.Transactions;
+using CoWork.Domain.Wallets;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +15,8 @@ namespace CoWork.Infrastructure.Persistence
     public class AppDbContext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
     {
         public DbSet<Member> Members { get; set; }
+        public DbSet<Transaction> Transactions {  get; set; }
+        public DbSet<WalletAccount> WalletAccounts { get; set; }    
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
