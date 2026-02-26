@@ -1,7 +1,6 @@
-﻿using AutoMapper;
-using CoWork.Application.Features.Auth.Command.CahngePassword;
-using CoWork.Application.Features.Members.Command.CreateMember;
+﻿using CoWork.Application.Features.Members.Command.CreateMember;
 using CoWork.Application.Interfaces;
+using CoWork.Application.Interfaces.MinIO;
 using CoWork.Application.Mapping;
 using CoWork.Infrastructure.Identity;
 using CoWork.Infrastructure.Persistence;
