@@ -18,6 +18,8 @@ namespace CoWork.Domain.Reservations
         public ReservationStatus Status { get; private set; }
         private readonly List<ReservationDay> _days = new();
         public IReadOnlyCollection<ReservationDay> Days => _days.AsReadOnly();
+       
+
         public decimal TotalPrice { get; private set; }
         public decimal FinalPrice { get; private set; }
         public AppliedDiscount? AppliedDiscount { get; private set; }
@@ -87,6 +89,21 @@ namespace CoWork.Domain.Reservations
             if (FinalPrice < 0)
                 FinalPrice = 0;
         }
+        public void RemoveDiscount(string code)
+        {
+            if (IsPaid)
+                throw new InvalidOperationException("Cannot remove discount from paid reservation");
+
+            if (AppliedDiscount == null)
+                throw new InvalidOperationException("No discount applied to reservation");
+
+            if (AppliedDiscount.Code != code)
+                throw new InvalidOperationException("Discount code does not match applied discount");
+
+            FinalPrice += AppliedDiscount.DiscountAmount;
+            AppliedDiscount = null;
+
+        }
         public bool IsPaid { get; private set; }
         public void MarkAsPaid()
         {
@@ -97,6 +114,12 @@ namespace CoWork.Domain.Reservations
                 throw new InvalidOperationException("Invalid final price");
             Status = ReservationStatus.Paid;
             IsPaid = true;
+        }
+        public void CancelReservation()
+        {
+            if (!IsPaid) throw new InvalidOperationException("reservation is not done before");
+           
+            Status = ReservationStatus.Cancelled;
         }
     }
 }

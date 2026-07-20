@@ -44,6 +44,11 @@ namespace CoWork.Domain.Spaces
             var setting=GetOrCreateDailySetting(date);
             setting.ReserveSeat(BaseCapacity);
         }
+        public void Cancel(DateOnly date)
+        {
+            var setting= GetOrCreateDailySetting(date);
+            setting.CancelSeat();
+        }
         public void ChangeDailyCapacity(DateOnly date,int capacity)
         {
             var setting= GetOrCreateDailySetting(date);

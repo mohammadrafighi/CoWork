@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CoWork.Domain.Reservations.Pricing
 {
-    public class TieredPricingPolicy
+    public class TieredPricingPolicy:IPricingPolicy
     {
         private readonly List<TieredPricingRule> _rules;
 

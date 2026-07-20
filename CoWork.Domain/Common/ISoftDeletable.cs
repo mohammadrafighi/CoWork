@@ -9,3 +9,4 @@ namespace CoWork.Domain.Common
         bool IsDeleted { get; set; }
     }
 }
+
