@@ -31,8 +31,4 @@
     <ProjectReference Include="..\CoWork.Domain\CoWork.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Persistence\Configurations\" />
-  </ItemGroup>
-
 </Project>

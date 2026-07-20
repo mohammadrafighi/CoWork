@@ -18,8 +18,7 @@ namespace CoWork.Application.Features.Reservations.Command.ApplyDiscountToReserv
             var reservation = await _unitOfWork.Reservations.GetByIdAsync(command.reservationId, cancellationToken)
                 ?? throw new InvalidOperationException("reservation not found");
 
-            if (reservation.IsPaid) throw new InvalidOperationException("reservation ended");
-
+           
             var discount = await _unitOfWork.Discounts
                    .QuerySingleAsync(d => d.Code == command.discountCode, d => d,
                        cancellationToken: cancellationToken
@@ -28,6 +27,8 @@ namespace CoWork.Application.Features.Reservations.Command.ApplyDiscountToReserv
 
             if (!discount.CanBeUsedBy(reservation.UserId))
                 throw new InvalidOperationException("Discount not allowed");
+            
+            
             var discountResult = discount.Apply(reservation.UserId, reservation.TotalPrice);
             reservation.ApplyDiscount(discount.Code, discountResult);
 

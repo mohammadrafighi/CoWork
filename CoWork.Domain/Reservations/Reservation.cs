@@ -18,6 +18,8 @@ namespace CoWork.Domain.Reservations
         public ReservationStatus Status { get; private set; }
         private readonly List<ReservationDay> _days = new();
         public IReadOnlyCollection<ReservationDay> Days => _days.AsReadOnly();
+       
+
         public decimal TotalPrice { get; private set; }
         public decimal FinalPrice { get; private set; }
         public AppliedDiscount? AppliedDiscount { get; private set; }
@@ -112,6 +114,12 @@ namespace CoWork.Domain.Reservations
                 throw new InvalidOperationException("Invalid final price");
             Status = ReservationStatus.Paid;
             IsPaid = true;
+        }
+        public void CancelReservation()
+        {
+            if (!IsPaid) throw new InvalidOperationException("reservation is not done before");
+           
+            Status = ReservationStatus.Cancelled;
         }
     }
 }

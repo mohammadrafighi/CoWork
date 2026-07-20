@@ -2,6 +2,7 @@
 using CoWork.Application.Interfaces;
 using CoWork.Application.Interfaces.MinIO;
 using CoWork.Application.Mapping;
+using CoWork.Infrastructure.Generators;
 using CoWork.Infrastructure.Identity;
 using CoWork.Infrastructure.MinIO;
 using CoWork.Infrastructure.Persistence;
@@ -55,6 +56,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IBucketNameResolver, BucketNameResolver>();
+builder.Services.AddScoped<IDiscountCodeGenerator, DiscountCodeGenerator>();
+builder.Services.AddScoped<IReservationCodeGenerator,ReservationCodeGenerator>();
 builder.Services.AddScoped<IFileStorageService, MinIORepository>();
 var minioSettings = builder.Configuration.GetSection("MinioSettings");
 builder.Services.AddSingleton<IMinioClient>(sp =>
