@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using CoWork.Application.Features.Auth.Command.CahngePassword;
-using CoWork.Application.Features.Members.Command.CreateMember;
+﻿using CoWork.Application.Features.Members.Command.CreateMember;
 using CoWork.Application.Interfaces;
 using CoWork.Application.Interfaces.MinIO;
 using CoWork.Application.Mapping;
@@ -58,6 +56,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IBucketNameResolver, BucketNameResolver>();
+builder.Services.AddScoped<IDiscountCodeGenerator, DiscountCodeGenerator>();
+builder.Services.AddScoped<IReservationCodeGenerator,ReservationCodeGenerator>();
 builder.Services.AddScoped<IFileStorageService, MinIORepository>();
 //پاک شه بعدا
 builder.Services.AddScoped<IReservationCodeGenerator, ReservationCodeGenerator>();

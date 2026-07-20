@@ -32,6 +32,10 @@ namespace CoWork.Domain.Spaces
 
             ReservedCount++;
         }
+        public void CancelSeat()
+        {
+            ReservedCount--;
+        }
         public void ChangeCapacity(int capacity)
         {
             if (capacity < ReservedCount)throw new InvalidOperationException("Capacity cannot be less than reserved count.");

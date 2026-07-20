@@ -57,6 +57,7 @@ namespace CoWork.Domain.Discounts
 
             _usages.Add(new DiscountUsage(userId));
         }
+        
 
 
     }

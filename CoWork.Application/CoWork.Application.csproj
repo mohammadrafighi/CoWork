@@ -17,12 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Reservations\Command\CancelReservation\" />
-    <Folder Include="Features\Reservations\Command\PayReservation\" />
-    <Folder Include="Features\Reservations\Query\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Folder Include="Features\Discounts\Command\UseDiscount\" />
+    <Folder Include="Features\Reservations\Query\GetReservationsForMonth\" />
+    <Folder Include="Features\Spaces\Command\ChangeWorkHours\" />
     <Folder Include="Features\Transactions\Command\" />
     <Folder Include="Features\Transactions\Query\" />
   </ItemGroup>
